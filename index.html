@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <input type="text">
+    <table>
+        <tr>
+            <td>
+                <button>7</button>
+            </td>
+            <td>
+                <button>8</button>
+            </td>
+            <td>
+                <button>9</button>
+            </td>
+            <td>
+                <button>/</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>4</button>
+            </td>
+            <td>
+                <button>5</button>
+            </td>
+            <td>
+                <button>6</button>
+            </td>
+            <td>
+                <button>X</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>1</button>
+            </td>
+            <td>
+                <button>2</button>
+            </td>
+            <td>
+                <button>3</button>
+            </td>
+            <td>
+                <button>-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>0</button>
+            </td>
+            <td>
+                <button>.</button>
+            </td>
+            <td>
+                <button>👈</button>
+            </td>
+            <td>
+                <button>+</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>=</button>
+            </td>
+        </tr>
+    </table>
+    <style>
+        table {
+            background-color: #404040;
+            width: 500px;
+        }
+
+        table button {
+            background-color: #7f7f7f;
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+            height: 80px;
+            width: 95%;
+            font-size: 30px;
+            border-radius: 10px;
+        }
+
+        input[type='text'] {
+            width: 480px;
+            border: 0;
+            background-color: #ededed;
+            outline: 0;
+            text-align: right;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (event)=>{
+                let current = event.target.innerHTML;
+                current = current !== '👈' ? current : null;
+                current = current === 'X' ? '*' : current;
+                if (current !== null && current !== '='){
+                    document.getElementsByTagName("input")[0].value = document.getElementsByTagName("input")[0].value + current;
+                }else if(current === '='){
+                    const output = eval(document.getElementsByTagName('input')[0].value);
+                    document.getElementsByTagName('input')[0].value = output;
+                }else{
+                    const ipt = document.getElementsByTagName('input')[0];
+                    let value_ = ipt.value;
+                    value_ = value_.split('');
+                    const till = value_.length - 1;
+                    let index = 0;
+                    let string = '';
+                    value_.map((i)=>{
+                        if (index < till){
+                            string = string + i;
+                        }
+                        index++;
+                    });
+                    ipt.value = string;
+                }
+            });
+        }); 
+    </script>
+</body>
+
+</html>
